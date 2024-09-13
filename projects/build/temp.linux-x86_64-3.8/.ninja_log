@@ -1,0 +1,15 @@
+# ninja log v5
+357	14807	1714544210976721000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_max_pool.o	ac82ce534c1c4a4
+349	14913	1714544211078998000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool.o	1bb2aae295197dfe
+345	16555	1714544212722047000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_pooling.o	97fd5bea3fd381a7
+361	32057	1714544228231239000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_max_pool_cuda.o	8a94ac5a8afd88ee
+353	32301	1714544228475483000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool_cuda.o	33b0d0acf6060639
+132	1147	1714544231086308000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool_cuda.o	7923a20bc0d65e1f
+127	15721	1714544245641789000	/opt/data/private/test/FlashOCC/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool.o	93b5541816f85cdc
+62	14933	1725718866555996000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool.o	3770e98061dc6d37
+62	14950	1725718866593271000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_max_pool.o	a3ec8b0444ac25ce
+61	16701	1725718868341056000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_pooling.o	3a258322112b1b21
+63	32236	1725718883886135000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_max_pool_cuda.o	e6b920832eeb0260
+62	32543	1725718884198480000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool_cuda.o	1b3510cd852fa5c0
+12	673	1725718886043738000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool_cuda.o	33831863cf78134c
+12	15378	1725718900732003000	/opt/data/private/test/DHD/projects/build/temp.linux-x86_64-3.8/mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool.o	3e3e8f8425d70c3f

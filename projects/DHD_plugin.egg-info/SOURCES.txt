@@ -1,0 +1,13 @@
+setup.py
+DHD_plugin.egg-info/PKG-INFO
+DHD_plugin.egg-info/SOURCES.txt
+DHD_plugin.egg-info/dependency_links.txt
+DHD_plugin.egg-info/not-zip-safe
+DHD_plugin.egg-info/top_level.txt
+mmdet3d_plugin/ops/bev_pool/src/bev_max_pool.cpp
+mmdet3d_plugin/ops/bev_pool/src/bev_max_pool_cuda.cu
+mmdet3d_plugin/ops/bev_pool/src/bev_pooling.cpp
+mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool.cpp
+mmdet3d_plugin/ops/bev_pool/src/bev_sum_pool_cuda.cu
+mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool.cpp
+mmdet3d_plugin/ops/bev_pool_v2/src/bev_pool_cuda.cu
