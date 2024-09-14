@@ -46,6 +46,7 @@ step 2、Prepare data
 ```
 
 Download [nuScene dataset](https://www.nuscenes.org) 
+
 Download 'gts' from [CVPR2023-3D-Occupancy-Prediction](https://github.com/CVPR2023-3D-Occupancy-Prediction/CVPR2023-3D-Occupancy-Prediction)
 
 
