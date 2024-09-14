@@ -51,7 +51,7 @@ The final dataset folder hierarchy:
 
 ```python
 └── data
-	└── nuscenes
+    └── nuscenes
         ├── v1.0-trainval
         ├── sweeps 
         ├── samples 
