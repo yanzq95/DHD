@@ -24,66 +24,60 @@ Yuan Wu</a><sup>1&ast;</sup>,
 [<a href="https://arxiv.org/pdf/2409.07972"><strong>Paper</strong></a>]
 [<a href="https://yanzq95.github.io/projectpage/DHD/index.html"><strong>Project Page</strong></a>]
 </p>
-![model](Figs/demo.gif)
 
-## Model
+<div align="center">
+  <img src="https://github.com/yanzq95/DHD/blob/main/Figs/demo.gif" alt="demo">
+</div>
+## Method
 
 ![model](Figs/model.png)
 
 **DHD** comprises a feature extractor, HeightNet, DepthNet, MGHS, SFA, and predictor. The feature extractor first acquires 2D image feature. Then, DepthNet extracts context feature and depth prediction. HeightNet generates the height map to determine the height value at each pixel. Next, MGHS integrates the output of HeightNet and DepthNet, acquiring height-refined feature and depth-based feature. Finally, the dual features are fed into the SFA to obtain the aggregated feature, which serves as input for the predictor.
 
-## Dependencies
+## Get Started
 
-```bash
-Python==3.8.13
-PyTorch==1.10.0
-numpy==1.23.4
-torchvision==0.11.0
-scipy==1.10.1
-Pillow==10.1.0
-scikit-image==0.21.0
-mmcls==0.25.0
-mmcv-full==1.5.3
-mmdet==2.25.1
-mmsegmentation==0.25.0
-```
+###  Installation and Data Preparation
 
-For the rest of the dependencies and data preparation, please refer to  <a href="https://github.com/Yzichen/FlashOCC">FlashOcc</a>.
+Step1、Prepare environment as that in [Install](doc/install.md).
 
-The final dataset folder hierarchy:
+Step2、Prepare nuScene and generate pkl file by runing：
 
 ```python
-└── data
-    └── nuscenes
-        ├── v1.0-trainval
-        ├── sweeps 
-        ├── samples 
-        ├── gts
-        ├── bevdetv2-nuscenes_infos_train.pkl (new)
-        └── bevdetv2-nuscenes_infos_val.pkl (new)
+python tools/create_data_bevdet.py
 ```
 
-The pretrained weights in **ckpt** folder can be found <a href="https://drive.google.com/drive/folders/1eWT82gFlY-ivyoeWza2GKD71RvwoXUDk?usp=drive_link">here</a>.
+The finnal directory structure for 'data' folder is like
 
-All DHD model weights can be found <a href="https://drive.google.com/drive/folders/1lJGJ083Pubhe9XE_xSxoB6qHnYMJxH9W?usp=sharing">here</a>.
+```shell
+└── data
+  └── nuscenes
+      ├── v1.0-trainval 
+      ├── sweeps  
+      ├── samples
+      ├── gts
+      ├── bevdetv2-nuscenes_infos_train.pkl 
+      └── bevdetv2-nuscenes_infos_val.pkl
+```
+###  Train & Test
 
-## Training
-
-```cmd
+```shell
 # train:
 tools/dist_train.sh ${config} ${num_gpu}
 # train DHD-S:
 tools/dist_train.sh projects/configs/DHD/DHD-S.py 4
-```
 
-## Testing
-
-```cmd
 # test:
 tools/dist_test.sh ${config} ${ckpt} ${num_gpu} --eval mAP
 # test DHD-S:
 tools/dist_test.sh projects/configs/DHD/DHD-S.py model_weight/DHD-S.pth 4 --eval mAP
 ```
+###  Model weights
+
+
+The pretrained weights in 'ckpts' folder can be found <a href="https://drive.google.com/drive/folders/1eWT82gFlY-ivyoeWza2GKD71RvwoXUDk?usp=drive_link">here</a>.
+
+All DHD model weights can be found <a href="https://drive.google.com/drive/folders/1lJGJ083Pubhe9XE_xSxoB6qHnYMJxH9W?usp=sharing">here</a>.
+
 ## Experiment
 ### Quantitative comparison
 <img src="Figs/table.png" alt="tab"  />
