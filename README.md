@@ -92,5 +92,14 @@ Many thanks to the authors of   <a href="https://github.com/HuangJunJie2017/BEVD
 
 ## Citation
 
+```
+@article{wu2024deep,
+  title={Deep Height Decoupling for Precise Vision-based 3D Occupancy Prediction},
+  author={Wu, Yuan and Yan, Zhiqiang and Wang, Zhengxue and Li, Xiang and Hui, Le and Yang, Jian},
+  journal={arXiv preprint arXiv:2409.07972},
+  year={2024}
+}
+```
+
 
 
