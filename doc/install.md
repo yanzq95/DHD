@@ -1,9 +1,9 @@
 ## Environment Setup
 step 1、Prepare conda environment
 ```bash
-conda create --name DHD python=3.8.5
+conda create --name DHD python=3.8.13
 conda activate DHD
-pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.10.0+cu113 torchvision==0.11.0+cu113 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 pip install mmcv-full==1.5.3
 pip install mmdet==2.25.1
 pip install mmsegmentation==0.25.0
@@ -19,6 +19,7 @@ pip install tensorboard
 pip install trimesh==2.35.39
 pip install setuptools==59.5.0
 pip install yapf==0.40.1
+pip install ninja
 
 cd Path_to_DHD
 git clone https://github.com/yanzq95/DHD.git
@@ -40,6 +41,7 @@ step 2、Prepare data
 └── data	
   └── nuscenes
       ├── v1.0-trainval 
+      ├── maps  
       ├── sweeps  
       ├── samples
       └── gts

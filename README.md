@@ -53,7 +53,8 @@ The finnal directory structure for 'data' folder is like
 ```shell
 └── data
   └── nuscenes
-      ├── v1.0-trainval 
+      ├── v1.0-trainval
+      ├── maps  
       ├── sweeps  
       ├── samples
       ├── gts

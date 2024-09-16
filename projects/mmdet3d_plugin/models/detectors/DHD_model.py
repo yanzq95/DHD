@@ -240,21 +240,6 @@ class DHD (BEVDetOCC):
         occ_preds = self.occ_head.get_occ (outs, img_metas)  # List[(Dx, Dy, Dz), (Dx, Dy, Dz), ...]
         return occ_preds
 
-    def forward_dummy(self,
-                      points=None,
-                      img_metas=None,
-                      img_inputs=None,
-                      **kwargs):
-        # img_feats: List[(B, C, Dz, Dy, Dx)/(B, C, Dy, Dx) , ]
-        # pts_feats: None
-        # depth: (B*N_views, D, fH, fW)
-        x_2d, x_3d, pts_feats, depth, height = self.extract_feat (points, img_inputs=img_inputs, img_metas=img_metas,
-                                                                  **kwargs)
-        combined = torch.cat ([x_2d,x_3d], dim=1)
-        occ_bev_feature = self.mix (combined)
-        outs = self.occ_head (occ_bev_feature)
-        return outs
-
 
 @DETECTORS.register_module ()
 class DHD_stereo (BEVStereo4D):
@@ -679,20 +664,3 @@ class DHD_stereo (BEVStereo4D):
         outs = self.occ_head (outs)
         occ_preds = self.occ_head.get_occ (outs, img_metas)  # List[(Dx, Dy, Dz), (Dx, Dy, Dz), ...]
         return occ_preds
-
-    # TODO: 待修改
-    def forward_dummy(self,
-                      points=None,
-                      img_metas=None,
-                      img_inputs=None,
-                      **kwargs):
-        # img_feats: List[(B, C, Dz, Dy, Dx)/(B, C, Dy, Dx) , ]
-        # pts_feats: None
-        # depth: (B*N_views, D, fH, fW)
-        x_2d, x_3d, pts_feats, depth = self.extract_feat (
-            points, img_inputs=img_inputs, img_metas=img_metas, **kwargs)
-        import pdb; pdb.set_trace()
-        combined = torch.cat ([x_2d,x_3d], dim=1)
-        occ_bev_feature = self.mix (combined)
-        outs = self.occ_head (occ_bev_feature)
-        return outs

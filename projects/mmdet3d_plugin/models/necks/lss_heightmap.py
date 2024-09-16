@@ -117,7 +117,6 @@ class MGHS (BaseModule):
         """
         H_in, W_in = input_size  # 256 x 704
         H_feat, W_feat = H_in // downsample, W_in // downsample
-        # d: 生成深度坐标，将 d 扩展成一个与特征图大小匹配的 3D tensor
         d = torch.arange (*depth_cfg, dtype=torch.float).view (-1, 1, 1).expand (-1, H_feat, W_feat)  # (D, fH, fW)
         self.D = d.shape[0]
         if self.sid:
@@ -127,7 +126,6 @@ class MGHS (BaseModule):
                                torch.log ((depth_cfg_t[1] - 1) / depth_cfg_t[0]))
             d = d_sid.view (-1, 1, 1).expand (-1, H_feat, W_feat)
 
-        # x,y分别表示特征图书每个像素的水平、垂直坐标
         x = torch.linspace (0, W_in - 1, W_feat, dtype=torch.float) \
             .view (1, 1, W_feat).expand (self.D, H_feat, W_feat)  # (D, fH, fW)
         y = torch.linspace (0, H_in - 1, H_feat, dtype=torch.float) \
@@ -396,8 +394,6 @@ class MGHS (BaseModule):
             bev_feat: (B, C*Dz(=1), Dy, Dx)
             depth: (B*N, D, fH, fW)
         """
-        # reset config!!!
-
         B, N, C, H, W = input[0].shape  # fH=16,fW=44
         # Lift-Splat
         coor = self.get_ego_coor (*input[1:7])  # (B, N, D, fH, fW, 3)  # 获取车辆坐标系坐标
@@ -432,8 +428,8 @@ class MGHS (BaseModule):
             'z': [-1, 5.4, 6.4],
             'depth': [1.0, 45.0, 0.5],  # (45-1)/0.5
         }
-        self.create_grid_infos (**self.grid_config)  # self.grid_size:(200,200,1)
-        bev_feat, depth_feat = self.view_transform_core (input, depth, tran_feat)  # (B, C, 1, 200, 200)
+        self.create_grid_infos (**self.grid_config)  
+        bev_feat, depth_feat = self.view_transform_core (input, depth, tran_feat)  
 
         height_map = self.height_feature_to_height_map(height,self.height_range)  # (BxN, fH, fW)
         mask_1,mask_2,mask_3 = self.create_mask_3(height_map,h_min=self.mask_range[0],thr1=self.mask_range[1],thr2=self.mask_range[2],h_max=self.mask_range[3])  # (BxN, fH, fW)
@@ -445,20 +441,20 @@ class MGHS (BaseModule):
         masked_feat_2 = tran_feat * mask_2_expanded
         masked_feat_3 = tran_feat * mask_3_expanded
         
-        # 最底层
+        # L
         self.grid_config = self.mask_1_grid
-        self.create_grid_infos (**self.grid_config)  # self.grid_size:(200,200,1)
-        bev_feat_masked_1, _ = self.view_transform_core (input, depth, masked_feat_1)  # (B,8xC,200,200) (low)
+        self.create_grid_infos (**self.grid_config)  
+        bev_feat_masked_1, _ = self.view_transform_core (input, depth, masked_feat_1) 
 
-        # 中间层
+        # M
         self.grid_config = self.mask_2_grid
-        self.create_grid_infos (**self.grid_config)  # self.grid_size:(200,200,1)
-        bev_feat_masked_2, _ = self.view_transform_core (input, depth, masked_feat_2)  # (B,4xC,200,200) (mid)
+        self.create_grid_infos (**self.grid_config) 
+        bev_feat_masked_2, _ = self.view_transform_core (input, depth, masked_feat_2)  
 
-        # 最高层
+        # H
         self.grid_config = self.mask_3_grid
-        self.create_grid_infos (**self.grid_config)  # self.grid_size:(200,200,1)
-        bev_feat_masked_3, _ = self.view_transform_core (input, depth, masked_feat_3)  # (B,4xC,200,200) (low)
+        self.create_grid_infos (**self.grid_config)  
+        bev_feat_masked_3, _ = self.view_transform_core (input, depth, masked_feat_3)  
     
         return bev_feat, depth_feat, height, bev_feat_masked_1,bev_feat_masked_2,bev_feat_masked_3
 
@@ -484,8 +480,8 @@ class MGHS (BaseModule):
         x = x.view (B * N, C, H, W)  # (B*N, C_in, fH, fW)
         # (B*N, C_in, fH, fW) --> (B*N, D+C, fH, fW)
         x_d = self.depth_net (x)
-        depth_digit = x_d[:, :self.D, ...]  # (B*N, D, fH, fW) 预测的深度信息
-        tran_feat_d = x_d[:, self.D:self.D + self.out_channels, ...]  # (B*N, C, fH, fW) 经过神经网络转化后的特征图
+        depth_digit = x_d[:, :self.D, ...]  # (B*N, D, fH, fW)
+        tran_feat_d = x_d[:, self.D:self.D + self.out_channels, ...]  # (B*N, C, fH, fW) 
         depth = depth_digit.softmax (dim=1) # (B*N, D, fH, fW)
 
         x_h = self.height_net(x, mlp_input, stereo_metas)
@@ -540,10 +536,10 @@ class MGHS (BaseModule):
         if len (height_feature.shape) != 4:
             raise ValueError ("Input tensor must have 4 dimensions (BxN, H, fH, fW)")
         # 获取每个向量中最大值的索引
-        height_indices = torch.argmax(height_feature, dim=1)  # 形状为 (BxN,fH, fW)
+        height_indices = torch.argmax(height_feature, dim=1)  # (BxN,fH, fW)
         # 将索引映射到高度范围
         height_range_tensor = torch.tensor(height_range, device=height_feature.device)
-        heights = height_range_tensor[height_indices]  # 形状为 (BxN, fH, fW)
+        heights = height_range_tensor[height_indices]  # (BxN, fH, fW)
         return heights
 
     def create_mask_3(self, input_tensor, h_min, thr1, thr2, h_max):
@@ -580,25 +576,17 @@ class MGHS (BaseModule):
         B, N, H, W = height_maps.shape
         assert H % downsample_factor == 0, "Height must be divisible by downsample factor"
         assert W % downsample_factor == 0, "Width must be divisible by downsample factor"
-        # 将零值替换为大值
         height_maps_tmp = torch.where (height_maps == 0.0, 1e5 * torch.ones_like (height_maps), height_maps)
-        # 调整形状以便下采样处理
         height_maps_tmp = height_maps_tmp.view (
             B, N, H // downsample_factor, downsample_factor,
                   W // downsample_factor, downsample_factor
         )
-        # 重新排列维度，使下采样块连续
         height_maps_tmp = height_maps_tmp.permute (0, 1, 2, 4, 3, 5).contiguous ()
-
-        # 展平成每个小块的向量
         height_maps_tmp = height_maps_tmp.view (B, N, -1, downsample_factor * downsample_factor)
-        # 取每个小块的最小值
         height_maps_downsampled = torch.min (height_maps_tmp, dim=-1).values
-        # 将大值替换回零值
         height_maps_downsampled = torch.where (height_maps_downsampled == 1e5,
                                                torch.zeros_like (height_maps_downsampled),
                                                height_maps_downsampled)
-        # 重新调整形状为 (B, N, H // downsample_factor, W // downsample_factor)
         height_maps_downsampled = height_maps_downsampled.view (B, N, H // downsample_factor, W // downsample_factor)
 
         return height_maps_downsampled
