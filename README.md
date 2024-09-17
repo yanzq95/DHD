@@ -48,7 +48,7 @@ Step2、Prepare nuScene and generate pkl file by runing：
 python tools/create_data_bevdet.py
 ```
 
-The finnal directory structure for 'data' folder is like
+The final directory structure for 'data' folder is like
 
 ```shell
 └── data
