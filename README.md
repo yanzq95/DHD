@@ -88,7 +88,7 @@ All DHD model weights can be found <a href="https://drive.google.com/drive/folde
 ### Visual comparison
 ![model](Figs/vis.png)
 ## Acknowledgements
-Many thanks to the authors of   <a href="https://github.com/HuangJunJie2017/BEVDet">BEVDet</a>, <a href="https://github.com/Yzichen/FlashOCC">FlashOcc</a>.
+Many thanks to the authors of   <a href="https://github.com/HuangJunJie2017/BEVDet">BEVDet</a> and <a href="https://github.com/Yzichen/FlashOCC">FlashOcc</a>.
 
 ## Citation
 
