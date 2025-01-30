@@ -1,4 +1,5 @@
 <p align="center">
+<h2 align="center"> Accepted to ICRA 2025! </h2>
 <h2 align="center"> Deep Height Decoupling for Precise Vision-based 3D Occupancy Prediction  </h2>
 
 
