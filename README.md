@@ -4,8 +4,8 @@
 
 
 <p align="center">
-Yuan Wu</a><sup>1&ast;</sup>, 
-<a href="https://yanzq95.github.io/">Zhiqiang Yan</a><sup>1&ast&dagger;	</sup>, 
+Yuan Wu</a><sup>1*;</sup>, 
+<a href="https://yanzq95.github.io/">Zhiqiang Yan</a><sup>1*&dagger;	</sup>, 
 <a href="https://scholar.google.com/citations?user=VogTuQkAAAAJ&hl=zh-CN">Zhengxue Wang</a><sup>1</sup>, 
 <a href="https://implus.github.io/">Xiang Li</a><sup>2</sup>, 
 <a href="https://fpthink.github.io/">Le Hui</a><sup>3</sup>, 
