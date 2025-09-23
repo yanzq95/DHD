@@ -94,11 +94,13 @@ Many thanks to the authors of   <a href="https://github.com/HuangJunJie2017/BEVD
 ## Citation
 
 ```
-@article{wu2024deep,
-  title={Deep Height Decoupling for Precise Vision-based 3D Occupancy Prediction},
+@inproceedings{wu2025deep,
+  title={Deep height decoupling for precise vision-based 3d occupancy prediction},
   author={Wu, Yuan and Yan, Zhiqiang and Wang, Zhengxue and Li, Xiang and Hui, Le and Yang, Jian},
-  journal={arXiv preprint arXiv:2409.07972},
-  year={2024}
+  booktitle={2025 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={12647--12654},
+  year={2025},
+  organization={IEEE}
 }
 ```
 
