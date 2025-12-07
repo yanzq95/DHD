@@ -240,7 +240,21 @@ class DHD (BEVDetOCC):
         occ_preds = self.occ_head.get_occ (outs, img_metas)  # List[(Dx, Dy, Dz), (Dx, Dy, Dz), ...]
         return occ_preds
 
+    def forward_dummy(self,
+                      points=None,
+                      img_metas=None,
+                      img_inputs=None,
+                      **kwargs):
+        # img_feats: List[(B, C, Dz, Dy, Dx)/(B, C, Dy, Dx) , ]
+        # pts_feats: None
+        # depth: (B*N_views, D, fH, fW)
+        img_feats_2d, img_feats_3d, _, _, _ = self.extract_feat(
+            points, img_inputs=img_inputs, img_metas=img_metas, **kwargs)
+            
+        occ_list = self.simple_test_occ ([img_feats_2d, img_feats_3d],
+                                         img_metas)  # List[(Dx, Dy, Dz), (Dx, Dy, Dz), ...]
 
+        return occ_list
 @DETECTORS.register_module ()
 class DHD_stereo (BEVStereo4D):
     def __init__(self,
